@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+	<html>
+	<head>
+			<meta charset="utf-8">
+			<meta name="viewport" content="width=device-width, initial-scale=1.0">
+			<meta http-equiv="X-UA-Compatible" content="IE=edge">
+			<title>{% block title %} Bienvenido {% endblock %}</title>
+			{% block css %}
+			<link rel="stylesheet" href="/media/bootstrap/css/bootstrap.css">
+			
+			<script  src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+			<script  src="/media/bootstrap/js/bootstrap.js"></script>
+
+			
+			<script  src="/media/js/vendor/modernizr-2.6.2.min.js"></script>
+			<script  src="/media/js/vendor/underscore.js"></script>
+			<script  src="/media/js/vendor/backbone.js"></script>
+			<script  src="/media/js/vendor/swig.js"></script>
+			<script  src="/media/js/init.js"></script>
+
+			<script  src="/media/js/backbone/models/producto.js"></script>
+			<script  src="/media/js/backbone/collections/productos.js"></script>
+			<script src="/media/js/backbone/views/producto.js"></script>
+			<script src="/media/js/backbone/routers/base.js"></script>
+        	
+
+			{% endblock %}
+			<style type="text/css">
+			body { padding-top: 70px; }
+			</style>
+	</head>
+	<body>
+
+		<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+			<div class="container">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            			<span class="icon-bar"></span>
+            			<span class="icon-bar"></span>
+            			<span class="icon-bar"></span>
+          			</button>
+					<a class="navbar-brand" href="{% url 'vista_principal' %}">Proyecto Ventas</a>
+				</div>
+				<div class="navbar-collapse collapse">
+				
+					<ul class="nav navbar-nav">
+						<li class="active"><a >Inicio</a></li>
+						<li><a href="productos/page/1">Productos</a>
+						<li><a href="{% url 'vista_contacto' %}">Contacto</a></li>
+						<li><a href="{% url 'vista_about' %}">Acerca de</a></li>
+					</ul>
+						{% if user.is_authenticated %}
+					<ul class="nav navbar-nav navbar-right">
+						<li class="dropdown">
+              				<a href="#" class="dropdown-toggle" data-toggle="dropdown">{{user.username}}<b class="caret"></b></a>
+              				<ul class="dropdown-menu">
+                				<li><a href="#">Action</a></li>
+                				<li><a href="#">Another action</a></li>
+                				<li><a href="#">Something else here</a></li>
+                				<li class="divider"></li>
+                				<li class="dropdown-header">Nav header</li>
+                				<li><a href="#">Separated link</a></li>
+                				<li><a href="{% url 'vista_logout' %}">Cerrar Sesion</a></li>
+              				</ul>
+              			</li>
+            		</ul>
+						{% else %}
+					<ul class="nav navbar-nav navbar-right">
+						<li><a href="{% url 'vista_login' %}">Login</a></li>
+					</ul>
+						{% endif %}
+				</div><!--fin invers-->
+			</div><!--fin nav-->
+		</div><!--/fin navbar-->
+		<div class="container">
+			<div class="row">
+				<div class="col-md-9">
+					<div id="contenido">
+						<aside>
+
+
+						</aside>
+
+					</div>
+					
+					 <script id="Producto_tpl" type="text/template">
+					 <section>
+					 	<article class="prodArt">
+					 	<div class="nombre">	                			
+                   <h3> {% templatetag openvariable %}post.nombre {% templatetag closevariable %}</h3>
+					</div>
+					 		
+					 	</article>
+					 	
+					 </section>
+            		
+        			</script>
+ 					
+
+
+					<div class="jumbotron">
+						{% block content %}
+						{% endblock %}
+					</div>
+				</div>
+				<div class="col-md-3" id="sidebar">
+				<div class="well sidebar-nav">
+					<ul class="nav nav-list">
+						<li class="nav-header">Mi Carrito</li>
+						<br><p align="justify">Carrito de Super</p>
+					</ul>
+				</div><!--Fin del well-->
+
+			</div><!--Fin del col-mod-3-->
+			<div class="col-md-3">
+				<div class="well sidebar-nav">
+					<ul class="nav nav-list">
+						<li class="nav-header">Nuevos Productos</li>
+						<br><p align="justify">Aquí irán nuevos productos</p>
+					</ul>
+				</div><!--Fin del well-->
+
+			</div><!--Fin del col-mod-3-->
+
+			</div><!--Fin del row-->
+			<hr>
+			<footer>
+				<p>&copy; Open Project 2013</p>
+			</footer>
+			
+		</div><!--Fin container-->
+	</body>
+	{% block js %}
+	<script  src="/media/js/main.js"></script>
+	{% endblock %}
+</html>
