@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
-{% block title %} Inicio - Biencenidos {% endblock %}
+{% block title %} Inicio - Bienvenidos {% endblock %}
 {% block content %} 
-
+<div class="inicio">
 <p>Esta es mi primera pagina en Django!..</p> 
 {% if user.is_authenticated %}
 <p>Biennvenido {{ user.username }}</p>
@@ -12,6 +12,103 @@
 	<p>Numero de Teléfono:{{ user.get_profile.telefono }}</p>
 {% endif %}
 {% endif %}
+</div>
+
+<div class="productos">
+
+	
+		<aside>
+		
+		<div class="ProductNew">
+			<div class="btnAdd">
+		<br>
+		
+			<button class="btn btn-success nuevo">Agregar</button>
+			
+		<br>
+		</div>
+		
+			<br>
+			<form id="formulario" method="post" enctype="multipart/form-data" style="display:none">
+			<p><input type="text" id="nombreId" name="nombre"></p>
+			<p><input type="text" id="descripcionId" name="descripcion"></p>
+			<p><input type="file" id="imagenId" name="imagen"/></p>
+			<p><input type="text" id="precioId" name="precio"></p>
+			<p><input type="text" id="stockId" name="stock"></p>
+			<input type="submit" class="btn btn-success agregar" value="Aceptar">
+			<button class="btn btn-danger cancelar">Cancelar</button>
+			</form>
+		
+
+		</div>
+		</aside>
+
+		
+	
+	<div class="ProductList">
+		<h2>Listado de Productos</h2>
+		{% verbatim %}
+	<script id="Producto_tpl" type="text/template">
+						<div class="fila">
+						<div class="thumb"><img src="/media/{{ post.imagen }}"></div>
+						<div class="nom">{{ post.nombre }}</div>
+						<div class="botones">
+						<a class="btn btn-primary btn-xs producto" ><li class="glyphicon glyphicon-search">Ver</li></a>
+						<a class="btn btn-danger btn-xs" ><li class="glyphicon glyphicon-trash modificar"> Modificar</li></a>
+						<a class="btn btn-danger btn-xs" ><li class="glyphicon glyphicon-trash eliminar"> Eliminar</li></a>
+ 	
+ 	
+ 	</div>
+ 	
+	</div>					       		
+ 	</script>
+ 	
+	
+ 	
+	</div>
+
+	
+
+ <script id="Producto_Extended_tpl" type="text/template">
+		
+			
+						<div class="ProdImg"><img src="/media/{{ post.imagen }}"></div>
+							<div class="items">
+								<div class="nomP">{{ post.nombre }}</div>
+								<div class="descP"><p>Descripción:</p> {{ post.descripcion }}</div>
+								<div class="precP"><p>Precio: </p> $ {{ post.precio }}</div>
+								<div class="stockP"><p> Stock:</p> {{ post.stock }}</div>
+								<div><a  name="MP-Checkout" class="btn btn-primary comprar">Comprar</a></div>
+							</div>
+					
+				
+            		
+ </script>
+
+  <script id="Producto_Update_tpl" type="text/template">
+		
+			
+						<div class="ProdImg"><img src="/media/{{ post.imagen }}"></div>
+							<div class="items">
+								<form id="formUpdate" method="post" enctype="multipart/form-data">
+									<p><input type="text" id="nombreUpId" value="{{ post.nombre }}" required="true"></p>
+									<p><input type="text"  id="descripcionUpId"  value="{{ post.descripcion }}"></p>
+									<p><input type="file"  id="imagenUpId" name="imagen" ></p>
+									<p><input type="text"  id="precioUpId"  value="{{ post.precio }}"></p>
+									<p><input type="text"  id="stockUpId"  value="{{ post.stock }}"></p>
+									<input type="submit" class="btn btn-success actualizar" value="Actualizar">
+									<button class="btn btn-danger cancelarUp">Cancelar</button>
+								</form>
+							</div>
+					
+				
+            		
+ </script>
+
+{% endverbatim %}
+	
+</div>
+
 {% endblock %}
 
 		

@@ -1,6 +1,7 @@
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from principal.apps.ventas.models import producto
+from principal.apps.ventas.forms import addProductForm
 from principal.apps.home.forms import ContactForm,LoginForm
 from django.core.mail import EmailMultiAlternatives
 
@@ -10,7 +11,10 @@ from django.http import HttpResponseRedirect
 from django.core.paginator import Paginator,EmptyPage,InvalidPage
 
 def index_view(request):
-	return render_to_response('home/index.html', context_instance=RequestContext(request))
+	productos = producto.objects.filter(status=True)
+	form = addProductForm()
+	ctx = {'productos':productos,'form':form}
+	return render_to_response('home/index.html',ctx, context_instance=RequestContext(request))
 
 def about_view(request):
 	mensaje = "Esto es un mensaje desde mi vista"

@@ -1,7 +1,9 @@
 Luispa.Routers.BaseRouter = Backbone.Router.extend({
 	routes: {
 		"" :  "root",
-		"producto/:id" : "productoSingle"
+		"productos" : "productos",
+		"producto/:id" : "productoSingle",
+		"productoUpdate/:id" : "productoUpdate"
 	},
 	initialize : function(){
 		var self = this;
@@ -9,17 +11,25 @@ Luispa.Routers.BaseRouter = Backbone.Router.extend({
 	},
 	root: function(){
 		var self = this;
-		$('#contenido > div').show();
-		//window.app.state = "root";
+		window.app.state = "root";
 		
 
 		
 		
 	},
+	productos : function(){
+		window.app.state = "productos";
+
+
+	},
 	productoSingle : function(id){
-		//window.app.state = "articleSingle";
-		//window.app.article = id;
-		$('#contenido > div').hide();
-		$('#contenido #' + id).show();
+		window.app.state = "productoSingle";
+		window.app.producto = id;
+		
+	},
+	productoUpdate : function(id){
+		window.app.state = "productoUpdate";
+		window.app.producto = id;
+		
 	}
 });

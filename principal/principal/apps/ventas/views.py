@@ -41,9 +41,14 @@ def add_product_view(request):
 
 
 
-from .serializers import ProductoSerializer
+from .serializers import ProductoSerializer, UserSerializer
 from rest_framework import viewsets
+from django.contrib.auth.models import User
 
 class ProductoViewSet(viewsets.ModelViewSet):
 	queryset = producto.objects.all()
 	serializer_class = ProductoSerializer
+
+class UserViewSet(viewsets.ModelViewSet):
+	queryset = User.objects.all()
+	serializer_class = UserSerializer

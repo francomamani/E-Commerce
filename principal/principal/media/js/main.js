@@ -3,10 +3,11 @@ $(document).ready(function(){
 
 	window.collections.productos = new Luispa.Collections.ProductoCollection();
 	window.routers.base = new Luispa.Routers.BaseRouter();
+	window.views.productoNew = new Luispa.Views.ProductoNewView($('.ProductNew'));
 	window.collections.productos.on('add', function(model){
 		var view = new Luispa.Views.ProductoView(model);
 		view.render();
-		view.$el.insertAfter('#contenido aside');
+		$('.productos').append(view.$el);
 	});
 
 	var xhr = $.get('/api/productos');
@@ -24,8 +25,12 @@ $(document).ready(function(){
 		});
 	});
 
-	$('.nav:first').on('click', function(){
+	$('#root').on('click', function(){
 		Backbone.history.navigate("", {trigger:true});
 	});
+	$('#productos').on('click', function(){
+		Backbone.history.navigate("productos", {trigger:true});
+	});
+	
 	
 });
